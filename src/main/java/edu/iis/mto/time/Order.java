@@ -22,25 +22,23 @@ public class Order {
 
         items.add(item);
         orderState = State.CREATED;
-
     }
 
     public void submit() {
         requireState(State.CREATED);
-
         orderState = State.SUBMITTED;
         subbmitionDate = new DateTime();
-
     }
 
-    public void confirm() {
+    public void confirm(DateTime end) {
         requireState(State.SUBMITTED);
-        int hoursElapsedAfterSubmittion = Hours.hoursBetween(subbmitionDate, new DateTime())
-                                               .getHours();
+        int hoursElapsedAfterSubmittion = Hours.hoursBetween(subbmitionDate, end).getHours();
         if (hoursElapsedAfterSubmittion > VALID_PERIOD_HOURS) {
             orderState = State.CANCELLED;
             throw new OrderExpiredException();
         }
+
+        this.orderState = State.CONFIRMED;
     }
 
     public void realize() {
@@ -59,11 +57,7 @@ public class Order {
             }
         }
 
-        throw new OrderStateException("order should be in state "
-                                      + allowedStates
-                                      + " to perform required  operation, but is in "
-                                      + orderState);
-
+        throw new OrderStateException("order should be in state " + allowedStates + " to perform required  operation, but is in " + orderState);
     }
 
     public enum State {
