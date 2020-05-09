@@ -35,4 +35,12 @@ public class OrderTest {
         assertThat(Order.State.SUBMITTED, is(this.order.getOrderState()));
     }
 
+    @Test
+    public void testIfOrderStateIsConfirmed() {
+        this.order.addItem(new OrderItem());
+        this.order.submit();
+        this.order.confirm(DateTime.now());
+        assertThat(Order.State.CONFIRMED, is(this.order.getOrderState()));
+    }
+
 }
