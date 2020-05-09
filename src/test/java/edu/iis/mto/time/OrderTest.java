@@ -43,4 +43,12 @@ public class OrderTest {
         assertThat(Order.State.CONFIRMED, is(this.order.getOrderState()));
     }
 
+    @Test(expected = OrderExpiredException.class)
+    public void testIfOrderStateIsCancelled() {
+        this.order.addItem(new OrderItem());
+        this.order.submit();
+        this.order.confirm(DateTime.now().plusHours(30));
+        assertThat(Order.State.CANCELLED, is(this.order.getOrderState()));
+    }
+
 }
