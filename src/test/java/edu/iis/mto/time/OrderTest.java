@@ -28,5 +28,11 @@ public class OrderTest {
         assertThat(Order.State.CREATED, is(this.order.getOrderState()));
     }
 
+    @Test
+    public void testIfOrderStateIsSubmitted() {
+        this.order.addItem(new OrderItem());
+        this.order.submit();
+        assertThat(Order.State.SUBMITTED, is(this.order.getOrderState()));
+    }
 
 }
