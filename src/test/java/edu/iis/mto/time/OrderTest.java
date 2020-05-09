@@ -60,4 +60,10 @@ public class OrderTest {
         assertThat(Order.State.REALIZED, is(this.order.getOrderState()));
     }
 
+    @Test
+    public void testIfOrderStateIsCreatedWithProduct() {
+        this.order.addItem(new OrderItem());
+        assertThat(Order.State.CREATED, is(this.order.getOrderState()));
+    }
+
 }
