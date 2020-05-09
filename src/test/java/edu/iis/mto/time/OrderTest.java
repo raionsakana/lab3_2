@@ -51,4 +51,13 @@ public class OrderTest {
         assertThat(Order.State.CANCELLED, is(this.order.getOrderState()));
     }
 
+    @Test
+    public void testIfOrderStateIsRealized() {
+        this.order.addItem(new OrderItem());
+        this.order.submit();
+        this.order.confirm(DateTime.now());
+        this.order.realize();
+        assertThat(Order.State.REALIZED, is(this.order.getOrderState()));
+    }
+
 }
