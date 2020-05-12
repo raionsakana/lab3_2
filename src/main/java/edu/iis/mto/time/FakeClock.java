@@ -6,7 +6,9 @@ public class FakeClock implements Clock {
 
     private DateTime clock = new DateTime(0);
 
-    public FakeClock() {}
+    public FakeClock() {
+
+    }
 
     public void setClock(DateTime dateTime) {
         this.clock = dateTime;
