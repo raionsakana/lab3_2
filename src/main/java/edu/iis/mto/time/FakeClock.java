@@ -2,7 +2,7 @@ package edu.iis.mto.time;
 
 import org.joda.time.DateTime;
 
-public class FakeClock {
+public class FakeClock implements Clock {
 
     private DateTime clock = new DateTime(0);
 
@@ -12,6 +12,7 @@ public class FakeClock {
         this.clock = dateTime;
     }
 
+    @Override
     public DateTime now() {
         return clock;
     }
